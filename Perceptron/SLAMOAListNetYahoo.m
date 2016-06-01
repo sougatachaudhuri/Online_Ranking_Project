@@ -1,4 +1,4 @@
-% This code is to generate the Yandex graph in perceptron paper.
+% This code is to generate the Yahoo graph in perceptron paper.
 % It compares performance of the two perceptron algorithms and  online ListNet
 % on Yahoo dataset.
 

@@ -110,7 +110,7 @@ fileid=fopen('E:\Papers\Programs\Yandex\SLAMNDCG10.txt','wt');
 fprintf(fileid,'%f\t\n',AvgNDCGSLAMGain);
 fclose(fileid);
 
-% Write the rankers
+% Write the rankers. Not really necessary here but maybe used for other purposes
 fileid=fopen('E:\Papers\Programs\Yandex\ListNetRanker.txt','wt');
 fprintf(fileid,'%f\n',wrankListNet);
 fclose(fileid);

@@ -1,3 +1,4 @@
+% This code is to read the text files from the perceptron codes and print NDCG values against time
 function printfile()
 %AvgNDCGListNetGain=importdata('E:\Papers\Programs\LearningtoRankChallenge\ListNetNDCG10.txt','\n');
 %AvgNDCGSLAMGain=importdata('E:\Papers\Programs\LearningtoRankChallenge\SLAMNDCG10.txt','\n');

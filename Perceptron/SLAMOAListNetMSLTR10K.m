@@ -1,12 +1,12 @@
-% Online Ranking- New SLAM (Variant of RankSVM loss), actual RankSVM Loss
-% and ListNet,for Linear Kernel, via OGD, for MSLTR10K dataset. 
-% Moreover, the data is divided into 5 folds and hence t iterates over the 5 folds.
+%% This code is to generate the MSLTR graph in perceptron paper.
+% It compares performance of the two perceptron algorithms and  online ListNet
+% on MSLTR dataset. The actual dataset is divided into 5 folds and hence t iterates over the 5 folds.
 function SLAMOAListNetMSLTR10K()
 tic
 % Initializing parameters
 folds=['Fold1';'Fold2';'Fold3';'Fold4';'Fold5'];
 T=5;var=136;
-% Stores time-cumulative and time-average NDCG@k value for the two perceptron
+% The code finally stores time-cumulative and time-average NDCG@k value for the two perceptron
 % algorithms and online ListNet
 %(k varies according to what is set in NDCGLoss function)
 
@@ -104,6 +104,7 @@ fclose(fileid);
 fileid=fopen('E:\Papers\Programs\MSLTR10K\Experiments\SLAMNDCG10.txt','wt');
 fprintf(fileid,'%f\t\n',AvgNDCGSLAMGain);
 fclose(fileid);
+
 % Write the rankers
 fileid=fopen('E:\Papers\Programs\MSLTR10K\Experiments\ListNetRanker.txt','wt');
 fprintf(fileid,'%f\n',wrankListNet);
@@ -218,9 +219,9 @@ for i=1:len
 
     if(val>0)
          feature=data(index,2:bre)- data(i, 2:bre);
-         %temp=data(1:len,2:bre);
+         
          %temp=bsxfun(@minus,temp,data(i,2:bre)); 
-         %feature=temp(index,:);
+         
          grad=grad+weight(i)*(feature);
     end   
          

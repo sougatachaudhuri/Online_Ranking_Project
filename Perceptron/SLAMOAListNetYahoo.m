@@ -7,7 +7,7 @@ tic
 % Initializing parameters
 T=4;var=700;
 
-% Stores time-cumulative and time-average NDCG@k value for the two perceptron
+% The code finally stores time-cumulative and time-average NDCG@k value for the two perceptron
 % algorithms and online ListNet
 %(k varies according to what is set in NDCGLoss function)
 
@@ -18,6 +18,7 @@ wrankSLAM=zeros(var,1); wrankListNet= zeros(var,1); wrankOA=zeros(var,1);
 count=0;
 
 for t= 1:T
+    % Replace the file path according to wherever the data set is stored	 
     f = fopen('/Users/sougatachaudhuri/Documents/Experiments/Learning to Rank Challenge/ltrc_yahoo/set1.train.txt');
     X = zeros(2e5,0); % Feature dimension is the column length. 
     X(1,1:700)=0;
@@ -103,7 +104,7 @@ fclose(fileid);
 fileid=fopen('/Users/sougatachaudhuri/Documents/Experiments/Learning to Rank Challenge/SLAMNDCG10.txt','wt');
 fprintf(fileid,'%f\t\n',AvgNDCGSLAMGain);
 fclose(fileid);
-% Write the rankers
+% Write the rankers. I did not use the rankers later, but might be useful for other purposes
 fileid=fopen('/Users/sougatachaudhuri/Documents/Experiments/Learning to Rank Challenge/ListNetRanker.txt','wt');
 fprintf(fileid,'%f\n',wrankListNet);
 fclose(fileid);
@@ -126,6 +127,7 @@ data=X(:,2:(size(X,2)));
 
 %SLAM-Perceptron
 lossSLAM= NDCGLoss(wrankSLAM,data);
+
 if(lossSLAM>0)
 gradSLAM=transpose(calculateSLAMgradient(wrankSLAM,delta,data));
 end
@@ -140,6 +142,7 @@ end
 lossListNet=NDCGLoss(wrankListNet,data);
 gradListNet=calculateListNetgradient(wrankListNet,data);
 end
+
 % Gradient Function for ListNet Loss
 function [grad]=calculateListNetgradient(wrank,data)
 % Calculating the gradient from Eq.6 of ListNet paper.
@@ -213,9 +216,9 @@ for i=1:len
 
     if(val>0)
          feature=data(index,2:bre)- data(i, 2:bre);
-         %temp=data(1:len,2:bre);
+         
          %temp=bsxfun(@minus,temp,data(i,2:bre)); 
-         %feature=temp(index,:);
+         
          grad=grad+weight(i)*(feature);
     end   
          

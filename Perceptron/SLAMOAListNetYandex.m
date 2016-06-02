@@ -6,7 +6,7 @@ function SLAMOAListNetYandex()
 tic
 % Initializing parameters
 T=4;var=245;
-% Stores time-cumulative and time-average NDCG@k value for the two perceptron
+% The code finally stores time-cumulative and time-average NDCG@k value for the two perceptron
 % algorithms and online ListNet
 %(k varies according to what is set in NDCGLoss function)
 
@@ -17,7 +17,7 @@ wrankSLAM=zeros(var,1); wrankListNet= zeros(var,1); wrankOA=zeros(var,1);
 count=0;
 
 for t= 1:T
-   
+    % Change the destination file according to where the dataset is stored
     f = fopen('E:\Papers\Programs\Yandex\imat2009_learning.txt');
     X = zeros(2e5,0); % Feature dimension is the column length. Yandex dataset- 245
     X(1,1:245)=0;
@@ -109,6 +109,7 @@ fclose(fileid);
 fileid=fopen('E:\Papers\Programs\Yandex\SLAMNDCG10.txt','wt');
 fprintf(fileid,'%f\t\n',AvgNDCGSLAMGain);
 fclose(fileid);
+
 % Write the rankers
 fileid=fopen('E:\Papers\Programs\Yandex\ListNetRanker.txt','wt');
 fprintf(fileid,'%f\n',wrankListNet);
@@ -219,9 +220,9 @@ for i=1:len
 
     if(val>0)
          feature=data(index,2:bre)- data(i, 2:bre);
-         %temp=data(1:len,2:bre);
+         
          %temp=bsxfun(@minus,temp,data(i,2:bre)); 
-         %feature=temp(index,:);
+         
          grad=grad+weight(i)*(feature);
     end   
          
